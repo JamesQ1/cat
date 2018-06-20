@@ -3,6 +3,14 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
 	<filter>
+		<filter-name>cat-sso-filter</filter-name>
+		<filter-class>com.dianping.cat.report.view.CatSsoFilter</filter-class>
+		<init-param>
+			<param-name>logonStrings</param-name><!-- 对登录页面不进行过滤 -->
+			<param-value>sso/index.jsp;sso/dologin.jsp</param-value>
+		</init-param>
+	</filter>
+	<filter>
 		<filter-name>cat-filter</filter-name>
 		<filter-class>com.dianping.cat.servlet.CatFilter</filter-class>
 	</filter>
@@ -29,6 +37,10 @@
 		<load-on-startup>2</load-on-startup>
 	</servlet>
 	<filter-mapping>
+		<filter-name>cat-sso-filter</filter-name>
+		<url-pattern>/r/*</url-pattern>
+		</filter-mapping>
+	<filter-mapping>
 		<filter-name>cat-filter</filter-name>
 		<url-pattern>/r/*</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
@@ -48,6 +60,7 @@
 		<url-pattern>/jsp/*</url-pattern>
 		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
+
 	<servlet-mapping>
 		<servlet-name>mvc-servlet</servlet-name>
 		<url-pattern>/r/*</url-pattern>

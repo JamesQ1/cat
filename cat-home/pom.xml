@@ -80,6 +80,11 @@
         <artifactId>plexus-utils</artifactId>
         <version>3.0.24</version>
       </dependency>
+      <dependency>
+         <groupId>com.onelogin</groupId>
+         <artifactId>java-saml</artifactId>
+         <version>2.2.0</version>
+      </dependency>
    </dependencies>
    <build>
       <resources>
