@@ -39,14 +39,15 @@ public class CatSsoFilter implements Filter {
         SigninContext sc = new SigninContext(httpServletRequest, httpServletResponse);
         Session session = this.validate(sc);
         if(session == null) {
-            HttpServletResponseWrapper wrapper = new HttpServletResponseWrapper((HttpServletResponse) response);
             try {
                 Auth auth = new Auth(httpServletRequest, httpServletResponse);
                 if(request.getParameter("SAMLResponse") == null) {
                     auth.login();
                     return;
                 }
+                System.out.println("begin to processResposne");
                 auth.processResponse();
+                System.out.println("processResponse finisned");
                 Map<String, List<String>> attributes = auth.getAttributes();
                 String nameId = null;
                 for(Map.Entry<String, List<String>> entry : attributes.entrySet()) {
@@ -55,6 +56,7 @@ public class CatSsoFilter implements Filter {
                         break;
                     }
                 }
+//                String nameId = null;
                 String account = nameId == null ? "admin" : nameId; //default
                 String password = "abcdef"; //default
                 Credential credential = new Credential(account, password);
@@ -62,6 +64,7 @@ public class CatSsoFilter implements Filter {
                 chain.doFilter(request, response);
                 return;
             } catch (Exception e) {
+                System.out.println("Fail to hanle session is null");
                 e.printStackTrace();
             }
         } else {

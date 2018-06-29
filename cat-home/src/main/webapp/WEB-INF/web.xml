@@ -39,7 +39,7 @@
 	<filter-mapping>
 		<filter-name>cat-sso-filter</filter-name>
 		<url-pattern>/r/*</url-pattern>
-		</filter-mapping>
+	</filter-mapping>
 	<filter-mapping>
 		<filter-name>cat-filter</filter-name>
 		<url-pattern>/r/*</url-pattern>
